@@ -1,7 +1,7 @@
 # skypulse-webapp
 A modern and responsive weather dashboard built using HTML, CSS, and JavaScript. Features real-time weather updates, 5-day forecast, dynamic UI, dark mode, geolocation support, and API integration. Developed as part of a Front-End Development Internship project.
 
-# SkyPulse Weather Dashboard
+# SkyPulse
 
 A modern and responsive weather dashboard built using HTML, CSS, and JavaScript. This project provides real-time weather updates, forecasts, and a clean user interface with dynamic weather visuals.
 

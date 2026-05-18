@@ -45,6 +45,10 @@ A modern and responsive weather dashboard built using HTML, CSS, and JavaScript.
 OpenWeather API  
 https://openweathermap.org/api
 
+## Live Demo
+
+https://vaishnavi0221.github.io/skypulse-webapp/
+
 ## Internship Project
 
 Developed as part of a Front-End Development Internship project from Pinnacle Labs.

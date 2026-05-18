@@ -52,7 +52,3 @@ Developed as part of a Front-End Development Internship project from Pinnacle La
 ## Author
 
 Designed and Developed by Vaishnavi
-
-## Author
-
-Designed & Developed by Tara

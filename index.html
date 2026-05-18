@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkyPulse — Weather Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Fonts: Syne (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       DYNAMIC BACKGROUND LAYER
+       Changes based on weather condition
+  ═══════════════════════════════════════════ -->
+  <div class="bg-layer" id="bgLayer">
+    <!-- Floating orbs for ambient glow -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN APP WRAPPER
+  ═══════════════════════════════════════════ -->
+  <div class="app-wrapper">
+
+    <!-- ─── HEADER ─── -->
+    <header class="header">
+      <div class="logo">
+  <img src="weather_logo.png" alt="SkyPulse Logo" class="logo-img" />
+</div>
+    </header>
+
+    <!-- ─── SEARCH SECTION ─── -->
+    <section class="search-section">
+      <h1 class="hero-title">What's the weather<br/><em>like today?</em></h1>
+
+      <div class="search-bar" id="searchBar">
+        <!-- Location auto-detect button -->
+        <button class="locate-btn" id="locateBtn" title="Use my location" aria-label="Auto-detect location">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+            <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+          </svg>
+        </button>
+
+        <input
+          type="text"
+          id="cityInput"
+          class="city-input"
+          placeholder="Search city — e.g. Tokyo, Paris…"
+          autocomplete="off"
+          aria-label="City name"
+        />
+
+        <button class="search-btn" id="searchBtn" aria-label="Search weather">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <span>Search</span>
+        </button>
+      </div>
+
+      <!-- Recent Searches Chips -->
+      <div class="recent-searches" id="recentSearches">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- ─── ERROR MESSAGE ─── -->
+    <div class="error-message hidden" id="errorMessage" role="alert">
+      <span class="error-icon">⚠️</span>
+      <span id="errorText">City not found. Please try again.</span>
+    </div>
+
+    <!-- ─── LOADING SPINNER ─── -->
+    <div class="loading-state hidden" id="loadingState" aria-live="polite">
+      <div class="spinner"></div>
+      <p class="loading-text">Fetching weather data…</p>
+    </div>
+
+    <!-- ─── WEATHER CONTENT (hidden until data loads) ─── -->
+    <main class="weather-content hidden" id="weatherContent">
+
+      <!-- ── CURRENT WEATHER CARD ── -->
+      <section class="current-card glass-card" id="currentCard">
+        <div class="current-left">
+          <p class="city-name" id="cityName">—</p>
+          <p class="country-date" id="countryDate">—</p>
+          <div class="temp-row">
+            <span class="temp-value" id="tempValue">—</span>
+            <span class="temp-unit">°C</span>
+          </div>
+          <p class="condition-text" id="conditionText">—</p>
+        </div>
+
+        <div class="current-right">
+          <!-- Animated weather icon -->
+          <div class="weather-icon-wrap" id="weatherIconWrap">
+            <img id="weatherIcon" src="" alt="Weather condition icon" class="weather-icon" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ── STATS GRID ── -->
+      <section class="stats-grid" aria-label="Weather details">
+
+        <div class="stat-card glass-card" title="Feels Like Temperature">
+          <div class="stat-icon">🌡️</div>
+          <div class="stat-info">
+            <p class="stat-label">Feels Like</p>
+            <p class="stat-value" id="feelsLike">—</p>
+          </div>
+        </div>
+
+        <div class="stat-card glass-card" title="Humidity Percentage">
+          <div class="stat-icon">💧</div>
+          <div class="stat-info">
+            <p class="stat-label">Humidity</p>
+            <p class="stat-value" id="humidity">—</p>
+          </div>
+        </div>
+
+        <div class="stat-card glass-card" title="Wind Speed">
+          <div class="stat-icon">💨</div>
+          <div class="stat-info">
+            <p class="stat-label">Wind Speed</p>
+            <p class="stat-value" id="windSpeed">—</p>
+          </div>
+        </div>
+
+        <div class="stat-card glass-card" title="Atmospheric Pressure">
+          <div class="stat-icon">🔵</div>
+          <div class="stat-info">
+            <p class="stat-label">Pressure</p>
+            <p class="stat-value" id="pressure">—</p>
+          </div>
+        </div>
+
+        <div class="stat-card glass-card" title="Visibility Distance">
+          <div class="stat-icon">👁️</div>
+          <div class="stat-info">
+            <p class="stat-label">Visibility</p>
+            <p class="stat-value" id="visibility">—</p>
+          </div>
+        </div>
+
+        <div class="stat-card glass-card" title="UV Index">
+          <div class="stat-icon">☀️</div>
+          <div class="stat-info">
+            <p class="stat-label">Cloud Cover</p>
+            <p class="stat-value" id="cloudCover">—</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ── 5-DAY FORECAST ── -->
+      <section class="forecast-section" aria-label="5-day forecast">
+        <h2 class="section-title">5-Day Forecast</h2>
+        <div class="forecast-grid" id="forecastGrid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ─── FOOTER ─── -->
+    <footer class="footer">
+      <p class="footer-copy">
+        Designed &amp; Developed by
+        <strong>Vaishnavi</strong>
+        <br>
+        &nbsp;·&nbsp; Powered by
+        <a href="https://openweathermap.org/" target="_blank" rel="noopener">OpenWeather</a>
+      </p>
+      <div class="footer-links">
+        <div class="footer-links">
+  <span title="Light Mode">☀️</span>
+  <span title="Dark Mode">🌙</span>
+  <span title="Weather">🌦️</span>
+  <span title="Location">📍</span>
+</div>
+      </div>
+    </footer>
+
+  </div><!-- end .app-wrapper -->
+
+  <script src="script.js"></script>
+</body>
+</html>

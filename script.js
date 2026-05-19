@@ -430,6 +430,9 @@ cityInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') fetchWeather(cityInput.value.trim());
 });
 
+/* ══════════════════════════════════════════════════════
+   ON LOAD — Auto-load last searched city if available
+══════════════════════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
   const recent = getRecent();
   if (recent.length > 0) {

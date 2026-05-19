@@ -438,5 +438,3 @@ window.addEventListener('DOMContentLoaded', () => {
     fetchWeather(recent[0]);
   }
 });
-
-═══════════════════════════════════════════════════════════════ */

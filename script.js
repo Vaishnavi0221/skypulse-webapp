@@ -1,24 +1,3 @@
-/**
- * ═══════════════════════════════════════════════════════
- * SkyPulse — Weather Dashboard  |  script.js
- * ═══════════════════════════════════════════════════════
- *
- * HOW TO USE:
- *  1. Get a FREE API key at https://openweathermap.org/api
- *  2. Replace 'YOUR_API_KEY_HERE' below with your key
- *  3. Open index.html in a browser — done!
- *
- * FEATURES:
- *  • Search weather by city name
- *  • Auto-detect location via Geolocation API
- *  • 5-day / 3-hour forecast (daily rollup)
- *  • Dynamic background based on weather condition
- *  • Dark / Light theme toggle (saved to localStorage)
- *  • Recent searches saved to localStorage (max 5)
- *  • Loading animation + friendly error messages
- *  • Enter-key support for search
- */
-
 /* ── 🔑 YOUR API KEY ── */
 const API_KEY = '1347486dc4cc131b640301b7c1abe29f';   
 
@@ -451,9 +430,6 @@ cityInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') fetchWeather(cityInput.value.trim());
 });
 
-/* ══════════════════════════════════════════════════════
-   ON LOAD — Auto-load last searched city if available
-══════════════════════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
   const recent = getRecent();
   if (recent.length > 0) {
@@ -462,19 +438,5 @@ window.addEventListener('DOMContentLoaded', () => {
     fetchWeather(recent[0]);
   }
 });
-
-/* ═══════════════════════════════════════════════════════════════
-   HOW TO DEPLOY (quick reference — full guide in README.md)
-═══════════════════════════════════════════════════════════════
-
-   GITHUB PAGES:
-   1. Push this folder to a GitHub repo
-   2. Go to Settings → Pages → Source: Deploy from branch → main
-   3. Your site: https://yourusername.github.io/your-repo-name/
-
-   VERCEL (even easier):
-   1. Go to https://vercel.com and sign in with GitHub
-   2. Click "Add New → Project" → import your repo
-   3. Click Deploy — no config needed for static sites!
 
 ═══════════════════════════════════════════════════════════════ */

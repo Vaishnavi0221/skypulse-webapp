@@ -20,7 +20,7 @@
  */
 
 /* ── 🔑 YOUR API KEY ── */
-const API_KEY = '8a9a51120570079ae24983c33d157ef9';   
+const API_KEY = '1347486dc4cc131b640301b7c1abe29f';   
 
 /* ── API Base URLs (OpenWeatherMap v2.5 — Free Tier) ── */
 const BASE_URL     = 'https://api.openweathermap.org/data/2.5/weather';
